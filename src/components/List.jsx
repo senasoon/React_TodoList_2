@@ -12,7 +12,7 @@ const List = () => {
       <div>
         {todos.map((todo) => {
           if (todo.isDone===false){
-            return <Todo key={todo.id} title={todo.title} body={todo.body}/>;
+            return <Todo key={todo.id} title={todo.title} body={todo.body} id={todo.id}/>;
           } else {
             return null;
           }
@@ -22,7 +22,7 @@ const List = () => {
       <div>
         {todos.map((todo) => {
             if (todo.isDone){
-              return <Todo key={todo.id} title={todo.title} body={todo.body}/>;
+              return <Todo key={todo.id} title={todo.title} body={todo.body} id={todo.id}/>;
             } else {
               return null;
             }
