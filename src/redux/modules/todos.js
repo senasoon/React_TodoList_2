@@ -69,7 +69,8 @@ const todos = (state = initialState, action) => {
   
     case TOGGLE_STATUS_TODO:
       return {
-
+        ...state,
+        todos: state.todos.map((todo)=> todo.id === action.payload ? {...todo, isDone:!todo.isDone}:todo),
       };
     
     case GET_TODO_BY_ID:
