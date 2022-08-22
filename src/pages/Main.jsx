@@ -41,6 +41,7 @@ const StPtag = styled.p`
 const StInput = styled.input`
   background-color: transparent;
   color: white;
+  border: 1px solid ${(props) => props.invalid ? 'red' : 'tansparent'};
   margin-right: 5px;
 `;
 
@@ -56,12 +57,15 @@ const StButton = styled.button`
 const Main = (props) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
+  const [isValid, setIsValid] = useState(true);
 
   const titleText = (event) => {
+    setIsValid(true);
     setTitle(event.target.value);
   }
 
   const bodyText = (event) => {
+    setIsValid(true);
     setBody(event.target.value);
   }
 
@@ -70,8 +74,15 @@ const Main = (props) => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
-    if (title === "") return; // 아무것도 입력하지 않았을 때 dispatch 하지 않음
-    if (body === "") return;
+    if (title.trim().length === 0){
+      setIsValid(false);
+      return; // 아무것도 입력하지 않았을 때 dispatch 하지 않음
+    }
+
+    if (body.trim().length === 0){
+      setIsValid(false);
+      return; // 아무것도 입력하지 않았을 때 dispatch 하지 않음
+    }
 
     dispatch(
       addTodo({
@@ -91,9 +102,9 @@ const Main = (props) => {
       <StForm onSubmit={onSubmitHandler}>
         <StTitleAndContent>
           <StPtag>제목</StPtag>
-          <StInput onChange={titleText} value={title}></StInput>
+          <StInput invalid={!isValid} onChange={titleText} value={title}></StInput>
           <StPtag>내용</StPtag>
-          <StInput onChange={bodyText} value={body}></StInput>
+          <StInput invalid={!isValid} onChange={bodyText} value={body}></StInput>
         </StTitleAndContent>
         <StButton>추가하기</StButton>
       </StForm>
