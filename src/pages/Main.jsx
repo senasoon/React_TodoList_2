@@ -2,11 +2,60 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import List from '../components/List';
 import { addTodo } from '../redux/modules/todos';
+import styled from "styled-components";
 
-const Main = () => {
+const StContainer = styled.div`
+  max-width: 1200px;
+  min-width: 800px;
+  height: 100%;
+  margin: auto auto 30px auto;
+`;
+
+const StHeader = styled.header`
+  text-align: center;
+  color: #000E3F;
+`;
+
+const StForm = styled.form`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #000E3F;
+  border-radius: 50%;
+  padding: 20px;
+`;
+
+const StTitleAndContent = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+`;
+
+const StPtag = styled.p`
+  color: #ffff;
+  margin-right: 5px;
+`;
+
+const StInput = styled.input`
+  background-color: transparent;
+  color: white;
+  margin-right: 5px;
+`;
+
+const StButton = styled.button`
+  cursor: pointer;
+  color: #000E3F;
+  background-color: #ffff;
+  border-radius: 5px;
+  border: 0;
+  font-size: 12px;
+`;
+
+const Main = (props) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [id, setId] = useState(3);
 
   const titleText = (event) => {
     setTitle(event.target.value);
@@ -26,32 +75,30 @@ const Main = () => {
 
     dispatch(
       addTodo({
-        id: id,
         title:title,
         body:body,
-        isDone:false
       })
     );
 
     setTitle("");
     setBody("");
-    setId(id+1);
   };
 
+
   return (
-    <div>
-      <header><h1>T O  D O  L I S T</h1></header>
-      <form onSubmit={onSubmitHandler}>
-        <div>
-          <p>제목</p>
-          <input onChange={titleText} value={title}></input>
-          <p>내용</p>
-          <input onChange={bodyText} value={body}></input>
-        </div>
-        <button>추가하기</button>
-      </form>
-      <List />
-    </div>
+    <StContainer>
+      <StHeader><h1>T O  D O  L I S T</h1></StHeader>
+      <StForm onSubmit={onSubmitHandler}>
+        <StTitleAndContent>
+          <StPtag>제목</StPtag>
+          <StInput onChange={titleText} value={title}></StInput>
+          <StPtag>내용</StPtag>
+          <StInput onChange={bodyText} value={body}></StInput>
+        </StTitleAndContent>
+        <StButton>추가하기</StButton>
+      </StForm>
+      <List onClickDetailhandler={props.onClickDetailhandler}/>
+    </StContainer>
   );
 };
 

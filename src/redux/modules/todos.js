@@ -7,10 +7,11 @@ const TOGGLE_STATUS_TODO = "todos/TOGGLE_STATUS_TODO";
 const GET_TODO_BY_ID = "todos/GET_TODO_BY_ID";
 
 // Action Creator
+let id = 3;
 export const addTodo = (payload) => {
   return {
     type: ADD_TODO,
-    payload,
+    payload: {id: id++, ...payload, isDone: false}
   };
 };
 
@@ -57,26 +58,27 @@ const todos = (state = initialState, action) => {
   switch (action.type){
     case ADD_TODO:
       return {
-        ...state,
-        todos: [...state.todos, action.payload ],
+        // ...state,
+        todos: [ ...state.todos, action.payload ],
       };
     
     case DELETE_TODO:
       return {
-        ...state,
+        // ...state,
         todos: state.todos.filter((todo) => todo.id !== action.payload),
       };
   
     case TOGGLE_STATUS_TODO:
       return {
-        ...state,
+        // ...state,
         todos: state.todos.map((todo)=> todo.id === action.payload ? {...todo, isDone:!todo.isDone}:todo),
       };
     
-    case GET_TODO_BY_ID:
-      return {
-
-      };
+    // case GET_TODO_BY_ID:
+    //   return {
+    //     ...state,
+    //     todos: state.todos.find((todo) => todo.id === parseInt(action.payload))
+    //   };
     
     default:
       return state;
