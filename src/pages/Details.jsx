@@ -12,7 +12,7 @@ const Details = (props) => {
   const todo = todos.find((todo)=> todo.id === parseInt(param.id));
 
   return (
-      <TodoDetail key={todo.id} todo={todo} onClickMainHandler={props.onClickMainHandler}/>
+      <TodoDetail key={todo.id} {...todo} onClickMainHandler={props.onClickMainHandler}/>
     );
 };
 

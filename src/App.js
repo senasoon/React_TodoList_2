@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Main from './pages/Main';
 import Details from './pages/Details';
 import NotFound from './pages/NotFound';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 

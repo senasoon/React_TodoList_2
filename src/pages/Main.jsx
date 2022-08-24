@@ -31,9 +31,10 @@ const StTitleAndContent = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 12px;
+  height: 30px;
 `;
 
-const StPtag = styled.p`
+const StLabel = styled.label`
   color: #ffff;
   margin-right: 5px;
 `;
@@ -116,9 +117,9 @@ const Main = (props) => {
       <StHeader><h1>T O  D O  L I S T</h1></StHeader>
       <StForm onSubmit={onSubmitHandler} autocomplete="off">
         <StTitleAndContent>
-          <StPtag>제목</StPtag>
+          <StLabel>제목</StLabel>
           <StInput name="title" invalid={!isValid} onChange={titleChangeHandler} value={title} autocomplete="chrome-off"></StInput>
-          <StPtag>내용</StPtag>
+          <StLabel>내용</StLabel>
           <StInput name="comment" invalid={!isValid} onChange={commentChangeHandler} value={comment} autocomplete="chrome-off" ></StInput>
         </StTitleAndContent>
         <StButton>추가하기</StButton>

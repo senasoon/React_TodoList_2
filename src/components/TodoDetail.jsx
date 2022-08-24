@@ -26,15 +26,15 @@ const StButton = styled.button`
   height: 20px;
 `;
 
-const TodoDetail = ({ todo, onClickMainHandler }) => {
+const TodoDetail = ({ id, title, comment, onClickMainHandler }) => {
   return (
     <StContainer>
       <StSection>
-        <p>ID :{todo.id}</p>
+        <p>ID :{id}</p>
         <StButton onClick={onClickMainHandler}>이전으로</StButton>
       </StSection>
-      <h1>{todo.title}</h1>
-      <p>{todo.body}</p>
+      <h1>{title}</h1>
+      <p>{comment}</p>
     </StContainer>
   );
 }
