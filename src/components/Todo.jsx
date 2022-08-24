@@ -54,7 +54,7 @@ const StDetailBtn = styled.button`
   font-size: 12px;
 `;
 
-const Todo = ({todo, onClickDetailhandler}) => {
+const Todo = ({id, title, comment, isDone, onClickDetailhandler}) => {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todos.todos);
 
@@ -73,12 +73,12 @@ const Todo = ({todo, onClickDetailhandler}) => {
 
   return (
     <StContainer>
-      <StDetailBtn type="button" onClick={()=>onClickDetailhandler(todo.id)}>상세보기</StDetailBtn>
-      <h3 style={{marginLeft:"5px"}}>{todo.title}</h3>
-      <StPtag>{todo.body}</StPtag>
+      <StDetailBtn type="button" onClick={()=>onClickDetailhandler(id)}>상세보기</StDetailBtn>
+      <h3 style={{marginLeft:"5px"}}>{title}</h3>
+      <StPtag>{comment}</StPtag>
       <StButtonBox>
-        <StBtn type="button" onClick={()=>onDeleteHandler(todo.id)}>삭제하기</StBtn>
-        <StBtn type="button" onClick={()=>onUpdateHandler(todo.id)}>{todo.isDone? "취소":"완료"}</StBtn>
+        <StBtn type="button" onClick={()=>onDeleteHandler(id)}>삭제하기</StBtn>
+        <StBtn type="button" onClick={()=>onUpdateHandler(id)}>{isDone? "취소":"완료"}</StBtn>
       </StButtonBox>
     </StContainer>
   );

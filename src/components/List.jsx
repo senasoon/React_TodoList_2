@@ -42,7 +42,7 @@ const List = (props) => {
       <StBox>
         {todos.map((todo) => {
           if (todo.isDone===false){
-            return <Todo key={todo.id} todo={todo} onClickDetailhandler={props.onClickDetailhandler}/>;
+            return <Todo key={todo.id} {...todo} onClickDetailhandler={props.onClickDetailhandler}/>;
           } else {
             return null;
           }
@@ -52,7 +52,7 @@ const List = (props) => {
       <StBox>
         {todos.map((todo) => {
             if (todo.isDone){
-              return <Todo key={todo.id} todo={todo} onClickDetailhandler={props.onClickDetailhandler}/>;
+              return <Todo key={todo.id} {...todo} onClickDetailhandler={props.onClickDetailhandler}/>;
             } else {
               return null;
             }

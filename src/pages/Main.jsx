@@ -55,18 +55,31 @@ const StButton = styled.button`
 `;
 
 const Main = (props) => {
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [inputs, setInputs] = useState({
+    title: '',
+    comment: '',
+  });
+
+  const { title, comment } = inputs;
+
   const [isValid, setIsValid] = useState(true);
 
-  const titleText = (event) => {
+  const titleChangeHandler = (event) => {
     setIsValid(true);
-    setTitle(event.target.value);
-  }
+    const { value, name } = event.target;
+    setInputs({
+      ...inputs,
+      [name]: value
+    });
+  };
 
-  const bodyText = (event) => {
+  const commentChangeHandler = (event) => {
     setIsValid(true);
-    setBody(event.target.value);
+    const { value, name } = event.target;
+    setInputs({
+      ...inputs,
+      [name]: value
+    });
   }
 
   const dispatch = useDispatch();
@@ -79,7 +92,7 @@ const Main = (props) => {
       return; // 아무것도 입력하지 않았을 때 dispatch 하지 않음
     }
 
-    if (body.trim().length === 0){
+    if (comment.trim().length === 0){
       setIsValid(false);
       return; // 아무것도 입력하지 않았을 때 dispatch 하지 않음
     }
@@ -87,24 +100,26 @@ const Main = (props) => {
     dispatch(
       addTodo({
         title:title,
-        body:body,
+        comment:comment,
       })
     );
 
-    setTitle("");
-    setBody("");
+    setInputs({
+      title: '',
+      comment: '',
+    });
   };
 
 
   return (
     <StContainer>
       <StHeader><h1>T O  D O  L I S T</h1></StHeader>
-      <StForm onSubmit={onSubmitHandler}>
+      <StForm onSubmit={onSubmitHandler} autocomplete="off">
         <StTitleAndContent>
           <StPtag>제목</StPtag>
-          <StInput invalid={!isValid} onChange={titleText} value={title}></StInput>
+          <StInput name="title" invalid={!isValid} onChange={titleChangeHandler} value={title} autocomplete="chrome-off"></StInput>
           <StPtag>내용</StPtag>
-          <StInput invalid={!isValid} onChange={bodyText} value={body}></StInput>
+          <StInput name="comment" invalid={!isValid} onChange={commentChangeHandler} value={comment} autocomplete="chrome-off" ></StInput>
         </StTitleAndContent>
         <StButton>추가하기</StButton>
       </StForm>
